@@ -16,20 +16,20 @@ namespace GitData
 
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
-            string usernameCredential = yourGitHubUsername.Text.ToString().Trim();
-            string passwordCredential = yourGitHubPassword.Text.ToString().Trim();
-            string usernameToSearchFor = usernameToSearch.Text.ToString().Trim();
+            string usernameCredential = YourGitHubUsername.Text.ToString().Trim();
+            string passwordCredential = YourGitHubPassword.Text.ToString().Trim();
+            string usernameToSearchFor = UsernameToSearch.Text.ToString().Trim();
             
             try
             {
-                GitHubFactory.CreateOctokitUser(usernameCredential, passwordCredential, usernameToSearchFor);
-                MessageBox.Show(GitHubFactory.CreateUser().ToString());
+                GitHubFactory.CreateGitHubClient(usernameCredential, passwordCredential);
+                UserInfoBox.Text = GitHubFactory.CreateUser(usernameToSearchFor).ToString();
             }
             catch
             {
-                MessageBox.Show("Error");
+                Utilities.Utilities.ShowErrorMessage();
             }
         }
         

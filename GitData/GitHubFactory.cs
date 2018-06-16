@@ -9,41 +9,42 @@ namespace GitData.Storage
 {
     class GitHubFactory
     {
-        private static Octokit.User OctokitUser { get; set; }
+        private static GitHubClient _GitHubClient { get; set; }
 
-
-        public static User CreateUser()
+        public static User CreateUser(string username)
         {
-            if(OctokitUser == null)
+            if(_GitHubClient == null)
             {
                 throw new Exception();
             }
 
+            Octokit.User octokitUser = new Octokit.User();
+            Task.Run(async () =>
+            {
+                octokitUser = await _GitHubClient.User.Get(username);
+            }).GetAwaiter().GetResult();
+
             User user = new User
             {
-                Name = OctokitUser.Name,
-                Followers = OctokitUser.Followers,
-                Followings = OctokitUser.Following,
-                CreatedOn = OctokitUser.CreatedAt.LocalDateTime,
-                UpdatedOn = OctokitUser.UpdatedAt.LocalDateTime
+                Name = octokitUser.Name,
+                Followers = octokitUser.Followers,
+                Followings = octokitUser.Following,
+                CreatedOn = octokitUser.CreatedAt.LocalDateTime,
+                UpdatedOn = octokitUser.UpdatedAt.LocalDateTime
             };
 
             return user;
         }
 
-        public static void CreateOctokitUser(string usernameCredential, string passwordCredential, string usernameToSearchFor)
+        public static void CreateGitHubClient(string usernameCredential, string passwordCredential)
         {
-            var githubClient = new GitHubClient(new ProductHeaderValue("GitData"));
+            _GitHubClient = new GitHubClient(new ProductHeaderValue("GitData"));
 
             if (usernameCredential != "" && passwordCredential != "")
             {
-                githubClient.Credentials = new Credentials(usernameCredential, passwordCredential);
+                _GitHubClient.Credentials = new Credentials(usernameCredential, passwordCredential);
             }
-
-            Task.Run(async () =>
-            {
-                OctokitUser = await githubClient.User.Get(usernameToSearchFor);
-            }).GetAwaiter().GetResult();
+            
         }
 
 

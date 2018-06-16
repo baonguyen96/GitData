@@ -66,6 +66,7 @@
     <Compile Include="Repository.cs" />
     <Compile Include="RepositoryCollection.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="GitData.resx">
       <DependentUpon>GitData.cs</DependentUpon>
     </EmbeddedResource>

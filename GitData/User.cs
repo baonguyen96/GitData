@@ -21,11 +21,11 @@ namespace GitData.Storage
         public override string ToString()
         {
             return 
-                $"Name:       {Name}\n" +
-                $"Followers:  {Followers}\n" +
-                $"Followings: {Followings}\n" +
-                $"Created On: {CreatedOn}\n" +
-                $"Updated On: {UpdatedOn}\n";
+                $"{"Name:".PadRight(30, ' ')}{Name}\r\n" +
+                $"{"Followers:".PadRight(30, ' ')}{Followers}\r\n" +
+                $"{"Followings:".PadRight(30, ' ')}{Followings}\r\n" +
+                $"{"CreatedOn:".PadRight(30, ' ')}{CreatedOn}\r\n" +
+                $"{"UpdatedOn:".PadRight(30, ' ')}{UpdatedOn}";
         }
 
     }
