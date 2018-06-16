@@ -1,14 +1,6 @@
-﻿using Octokit;
+﻿using GitData.Storage;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using GitData.Storage;
 
 namespace GitData
 {
@@ -40,10 +32,6 @@ namespace GitData
                 MessageBox.Show("Error");
             }
         }
-
-        private void urlTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

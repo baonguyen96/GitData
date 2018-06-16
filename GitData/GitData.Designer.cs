@@ -1,4 +1,7 @@
-﻿namespace GitData
+﻿using System;
+using System.Drawing;
+
+namespace GitData
 {
     partial class GitData
     {
@@ -36,16 +39,18 @@
             // 
             // usernameToSearch
             // 
-            this.usernameToSearch.Location = new System.Drawing.Point(72, 113);
+            this.usernameToSearch.Location = new System.Drawing.Point(597, 41);
             this.usernameToSearch.Name = "usernameToSearch";
-            this.usernameToSearch.Size = new System.Drawing.Size(538, 20);
+            this.usernameToSearch.Size = new System.Drawing.Size(227, 20);
             this.usernameToSearch.TabIndex = 0;
-            this.usernameToSearch.Text = "GitHub username to search";
-            this.usernameToSearch.TextChanged += new System.EventHandler(this.urlTextBox_TextChanged);
+            this.usernameToSearch.Text = "GitHub Username to Search";
+            this.usernameToSearch.ForeColor = Color.Gray;
+            this.usernameToSearch.Enter += new System.EventHandler(this.usernameToSearch_Enter);
+            this.usernameToSearch.Leave += new System.EventHandler(this.usernameToSearch_Leave);
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(626, 110);
+            this.searchButton.Location = new System.Drawing.Point(856, 39);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(75, 23);
             this.searchButton.TabIndex = 1;
@@ -55,19 +60,25 @@
             // 
             // yourGitHubUsername
             // 
-            this.yourGitHubUsername.Location = new System.Drawing.Point(72, 70);
+            this.yourGitHubUsername.Location = new System.Drawing.Point(60, 42);
             this.yourGitHubUsername.Name = "yourGitHubUsername";
-            this.yourGitHubUsername.Size = new System.Drawing.Size(258, 20);
+            this.yourGitHubUsername.ForeColor = Color.Gray;
+            this.yourGitHubUsername.Size = new System.Drawing.Size(227, 20);
             this.yourGitHubUsername.TabIndex = 2;
-            this.yourGitHubUsername.Text = "Your GitHub username";
+            this.yourGitHubUsername.Text = "Your GitHub Username";
+            this.yourGitHubUsername.Enter += new System.EventHandler(this.yourGitHubUsername_Enter);
+            this.yourGitHubUsername.Leave += new System.EventHandler(this.yourGitHubUsername_Leave);
             // 
             // yourGitHubPassword
             // 
-            this.yourGitHubPassword.Location = new System.Drawing.Point(352, 70);
+            this.yourGitHubPassword.Location = new System.Drawing.Point(332, 41);
             this.yourGitHubPassword.Name = "yourGitHubPassword";
-            this.yourGitHubPassword.Size = new System.Drawing.Size(258, 20);
+            this.yourGitHubPassword.Size = new System.Drawing.Size(227, 20);
             this.yourGitHubPassword.TabIndex = 3;
             this.yourGitHubPassword.Text = "Your GitHub Password";
+            this.yourGitHubPassword.ForeColor = Color.Gray;
+            this.yourGitHubPassword.Enter += new System.EventHandler(this.yourGitHubPassword_Enter);
+            this.yourGitHubPassword.Leave += new System.EventHandler(this.yourGitHubPassword_Leave);
             // 
             // GitData
             // 
@@ -85,6 +96,63 @@
             this.PerformLayout();
 
         }
+
+        private void yourGitHubPassword_Leave(object sender, EventArgs e)
+        {
+            if (yourGitHubPassword.Text == "")
+            {
+                yourGitHubPassword.Text = "Your GitHub Password";
+                yourGitHubPassword.ForeColor = Color.Gray;
+                yourGitHubPassword.PasswordChar = Char.MinValue;
+            }
+        }
+
+        private void yourGitHubPassword_Enter(object sender, EventArgs e)
+        {
+            if (yourGitHubPassword.Text == "Your GitHub Password")
+            {
+                yourGitHubPassword.Text = "";
+                yourGitHubPassword.ForeColor = Color.Black;
+                yourGitHubPassword.PasswordChar = '*';
+            }
+        }
+
+        private void yourGitHubUsername_Leave(object sender, EventArgs e)
+        {
+            if (yourGitHubUsername.Text == "")
+            {
+                yourGitHubUsername.Text = "Your GitHub Username";
+                yourGitHubUsername.ForeColor = Color.Gray;
+            }
+        }
+
+        private void yourGitHubUsername_Enter(object sender, EventArgs e)
+        {
+            if (yourGitHubUsername.Text == "Your GitHub Username")
+            {
+                yourGitHubUsername.Text = "";
+                yourGitHubUsername.ForeColor = Color.Black;
+            }
+        }
+
+        private void usernameToSearch_Leave(object sender, EventArgs e)
+        {
+            if (usernameToSearch.Text == "")
+            {
+                usernameToSearch.Text = "GitHub Username to Search";
+                usernameToSearch.ForeColor = Color.Gray;
+            }
+        }
+
+        private void usernameToSearch_Enter(object sender, EventArgs e)
+        {
+            if (usernameToSearch.Text == "GitHub Username to Search")
+            {
+                usernameToSearch.Text = "";
+                usernameToSearch.ForeColor = Color.Black;
+            }
+        }
+
 
         #endregion
 
