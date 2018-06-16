@@ -60,8 +60,12 @@
     <Compile Include="GitData.Designer.cs">
       <DependentUpon>GitData.cs</DependentUpon>
     </Compile>
+    <Compile Include="GitHubFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="RepositoryCollection.cs" />
+    <Compile Include="User.cs" />
     <EmbeddedResource Include="GitData.resx">
       <DependentUpon>GitData.cs</DependentUpon>
     </EmbeddedResource>
