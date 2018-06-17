@@ -8,6 +8,7 @@
 
 ## Prerequisites
 
+- Windows (10)
 - .NET 4.5+
 - Visual Studio 2017
 
