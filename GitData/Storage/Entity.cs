@@ -14,7 +14,7 @@ namespace GitData.Storage
 
             foreach (var property in GetType().GetProperties())
             {
-                s += Utilities.Utilities.FormatKeyValuePair(
+                s += Utilities.Utility.FormatKeyValuePair(
                     property.Name, property.GetValue(this, null).ToString());
             }
 

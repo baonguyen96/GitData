@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace GitData.Utilities
 {
-    public static class Utilities
+    public class Utility
     {
         public static void ShowErrorMessage()
         {

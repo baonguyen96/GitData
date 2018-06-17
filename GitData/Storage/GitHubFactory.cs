@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using GitData.Utilities;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,11 +50,11 @@ namespace GitData.Storage
         {
             _GitHubClient = new GitHubClient(new ProductHeaderValue("GitData"));
 
-            if (usernameCredential != "" && passwordCredential != "")
+            if (usernameCredential != Prompts.UsernameCredentialPrompt && passwordCredential != Prompts.PasswordCredentialPrompt)
             {
                 _GitHubClient.Credentials = new Credentials(usernameCredential, passwordCredential);
             }
-            
+
         }
 
 

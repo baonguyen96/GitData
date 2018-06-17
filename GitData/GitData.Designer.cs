@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitData.Utilities;
+using System;
 using System.Drawing;
 
 namespace GitData
@@ -38,9 +39,9 @@ namespace GitData
             this.YourGitHubPassword = new System.Windows.Forms.TextBox();
             this.ResultPane = new System.Windows.Forms.TabControl();
             this.UserInfoPage = new System.Windows.Forms.TabPage();
-            this.UserInfoBox = new System.Windows.Forms.TextBox();
+            this.UserInfoTable = new System.Windows.Forms.TableLayoutPanel();
             this.RepositoryInfoPage = new System.Windows.Forms.TabPage();
-            this.RepositoryInfoBox = new System.Windows.Forms.TextBox();
+            this.RepositoryInfoTable = new System.Windows.Forms.TableLayoutPanel();
             this.ResultPane.SuspendLayout();
             this.UserInfoPage.SuspendLayout();
             this.RepositoryInfoPage.SuspendLayout();
@@ -61,7 +62,7 @@ namespace GitData
             // 
             this.SearchButton.Location = new System.Drawing.Point(834, 42);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(75, 23);
+            this.SearchButton.Size = new System.Drawing.Size(75, 21);
             this.SearchButton.TabIndex = 1;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -101,7 +102,7 @@ namespace GitData
             // 
             // UserInfoPage
             // 
-            this.UserInfoPage.Controls.Add(this.UserInfoBox);
+            this.UserInfoPage.Controls.Add(this.UserInfoTable);
             this.UserInfoPage.Location = new System.Drawing.Point(4, 22);
             this.UserInfoPage.Name = "UserInfoPage";
             this.UserInfoPage.Padding = new System.Windows.Forms.Padding(3);
@@ -110,19 +111,23 @@ namespace GitData
             this.UserInfoPage.Text = "User Info";
             this.UserInfoPage.UseVisualStyleBackColor = true;
             // 
-            // UserInfoBox
+            // UserInfoTable
             // 
-            this.UserInfoBox.BackColor = System.Drawing.Color.White;
-            this.UserInfoBox.Location = new System.Drawing.Point(7, 7);
-            this.UserInfoBox.Multiline = true;
-            this.UserInfoBox.Name = "UserInfoBox";
-            this.UserInfoBox.ReadOnly = true;
-            this.UserInfoBox.Size = new System.Drawing.Size(832, 459);
-            this.UserInfoBox.TabIndex = 0;
+            this.UserInfoTable.AutoSize = true;
+            this.UserInfoTable.BackColor = System.Drawing.Color.Transparent;
+            this.UserInfoTable.ColumnCount = 2;
+            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.0096F));
+            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.9904F));
+            this.UserInfoTable.Location = new System.Drawing.Point(6, 6);
+            this.UserInfoTable.Name = "UserInfoTable";
+            this.UserInfoTable.RowCount = 1;
+            this.UserInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.UserInfoTable.Size = new System.Drawing.Size(833, 460);
+            this.UserInfoTable.TabIndex = 0;
             // 
             // RepositoryInfoPage
             // 
-            this.RepositoryInfoPage.Controls.Add(this.RepositoryInfoBox);
+            this.RepositoryInfoPage.Controls.Add(this.RepositoryInfoTable);
             this.RepositoryInfoPage.Location = new System.Drawing.Point(4, 22);
             this.RepositoryInfoPage.Name = "RepositoryInfoPage";
             this.RepositoryInfoPage.Padding = new System.Windows.Forms.Padding(3);
@@ -131,15 +136,18 @@ namespace GitData
             this.RepositoryInfoPage.Text = "Repository Info";
             this.RepositoryInfoPage.UseVisualStyleBackColor = true;
             // 
-            // RepositoryInfoBox
+            // RepositoryInfoTable
             // 
-            this.RepositoryInfoBox.BackColor = System.Drawing.Color.White;
-            this.RepositoryInfoBox.Location = new System.Drawing.Point(6, 7);
-            this.RepositoryInfoBox.Multiline = true;
-            this.RepositoryInfoBox.Name = "RepositoryInfoBox";
-            this.RepositoryInfoBox.ReadOnly = true;
-            this.RepositoryInfoBox.Size = new System.Drawing.Size(832, 459);
-            this.RepositoryInfoBox.TabIndex = 1;
+            this.RepositoryInfoTable.ColumnCount = 2;
+            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.0096F));
+            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.99039F));
+            this.RepositoryInfoTable.Location = new System.Drawing.Point(6, 6);
+            this.RepositoryInfoTable.Name = "RepositoryInfoTable";
+            this.RepositoryInfoTable.RowCount = 1;
+            this.RepositoryInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RepositoryInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.RepositoryInfoTable.Size = new System.Drawing.Size(833, 40);
+            this.RepositoryInfoTable.TabIndex = 1;
             // 
             // GitData
             // 
@@ -159,7 +167,6 @@ namespace GitData
             this.UserInfoPage.ResumeLayout(false);
             this.UserInfoPage.PerformLayout();
             this.RepositoryInfoPage.ResumeLayout(false);
-            this.RepositoryInfoPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,7 +176,7 @@ namespace GitData
         {
             if (YourGitHubPassword.Text == "")
             {
-                YourGitHubPassword.Text = "Your GitHub Password";
+                YourGitHubPassword.Text = Prompts.PasswordCredentialPrompt;
                 YourGitHubPassword.ForeColor = Color.Gray;
                 YourGitHubPassword.PasswordChar = Char.MinValue;
             }
@@ -177,7 +184,7 @@ namespace GitData
 
         private void yourGitHubPassword_Enter(object sender, EventArgs e)
         {
-            if (YourGitHubPassword.Text == "Your GitHub Password")
+            if (YourGitHubPassword.Text == Prompts.PasswordCredentialPrompt)
             {
                 YourGitHubPassword.Text = "";
                 YourGitHubPassword.ForeColor = Color.Black;
@@ -189,14 +196,14 @@ namespace GitData
         {
             if (YourGitHubUsername.Text == "")
             {
-                YourGitHubUsername.Text = "Your GitHub Username";
+                YourGitHubUsername.Text = Prompts.UsernameCredentialPrompt;
                 YourGitHubUsername.ForeColor = Color.Gray;
             }
         }
 
         private void yourGitHubUsername_Enter(object sender, EventArgs e)
         {
-            if (YourGitHubUsername.Text == "Your GitHub Username")
+            if (YourGitHubUsername.Text == Prompts.UsernameCredentialPrompt)
             {
                 YourGitHubUsername.Text = "";
                 YourGitHubUsername.ForeColor = Color.Black;
@@ -207,14 +214,14 @@ namespace GitData
         {
             if (UsernameToSearch.Text == "")
             {
-                UsernameToSearch.Text = "GitHub Username to Search";
+                UsernameToSearch.Text = Prompts.UsernameToSearchPrompt;
                 UsernameToSearch.ForeColor = Color.Gray;
             }
         }
 
         private void usernameToSearch_Enter(object sender, EventArgs e)
         {
-            if (UsernameToSearch.Text == "GitHub Username to Search")
+            if (UsernameToSearch.Text == Prompts.UsernameToSearchPrompt)
             {
                 UsernameToSearch.Text = "";
                 UsernameToSearch.ForeColor = Color.Black;
@@ -229,10 +236,10 @@ namespace GitData
         private System.Windows.Forms.TextBox YourGitHubUsername;
         private System.Windows.Forms.TextBox YourGitHubPassword;
         private System.Windows.Forms.TabControl ResultPane;
-        private System.Windows.Forms.TabPage UserInfoPage;
         private System.Windows.Forms.TabPage RepositoryInfoPage;
-        private System.Windows.Forms.TextBox UserInfoBox;
-        private System.Windows.Forms.TextBox RepositoryInfoBox;
+        private System.Windows.Forms.TabPage UserInfoPage;
+        private System.Windows.Forms.TableLayoutPanel UserInfoTable;
+        private System.Windows.Forms.TableLayoutPanel RepositoryInfoTable;
     }
 }
 

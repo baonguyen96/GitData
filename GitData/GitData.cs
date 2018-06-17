@@ -18,6 +18,7 @@ namespace GitData
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            ClearTables();
             string usernameCredential = YourGitHubUsername.Text.ToString().Trim();
             string passwordCredential = YourGitHubPassword.Text.ToString().Trim();
             string usernameToSearchFor = UsernameToSearch.Text.ToString().Trim();
@@ -25,13 +26,40 @@ namespace GitData
             try
             {
                 GitHubFactory.CreateGitHubClient(usernameCredential, passwordCredential);
-                UserInfoBox.Text = GitHubFactory.CreateUser(usernameToSearchFor).ToString();
-                RepositoryInfoBox.Text = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor).ToString();
+
+                User user = GitHubFactory.CreateUser(usernameToSearchFor);
+                RepositoryCollection repositoryCollection = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor);
+
+                int rowCount = 0;
+                foreach (var property in user.GetType().GetProperties())
+                {
+                    string[] data = { property.Name, property.GetValue(user, null).ToString() };
+                    PopulateTable(UserInfoTable, data, rowCount++);
+                }
+                
+                //UserInfoBox.Text = GitHubFactory.CreateUser(usernameToSearchFor).ToString();
+                //RepositoryInfoBox.Text = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor).ToString();
             }
             catch(Exception ex)
             {
-                Utilities.Utilities.ShowErrorMessage(ex);
+                Utilities.Utility.ShowErrorMessage(ex);
             }
+        }
+        
+        private void ClearTables()
+        {
+            UserInfoTable.RowCount = 0;
+            RepositoryInfoTable.RowCount = 0;
+        }
+        
+
+        private void PopulateTable(TableLayoutPanel table, string[] rowsData, int rowID)
+        {
+            for (int column = 0; column < rowsData.Length; column++)
+            {
+                table.Controls.Add(new Label() { Text = rowsData[column] }, column, table.RowCount);
+            }
+            table.RowCount += 1;
         }
         
     }

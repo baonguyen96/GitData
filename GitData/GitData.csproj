@@ -57,20 +57,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity.cs" />
+    <Compile Include="Storage\Entity.cs" />
     <Compile Include="GitData.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GitData.Designer.cs">
       <DependentUpon>GitData.cs</DependentUpon>
     </Compile>
-    <Compile Include="GitHubFactory.cs" />
+    <Compile Include="Storage\GitHubFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="RepositoryCollection.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Utilities.cs" />
+    <Compile Include="Storage\Repository.cs" />
+    <Compile Include="Storage\RepositoryCollection.cs" />
+    <Compile Include="Storage\User.cs" />
+    <Compile Include="Utilities\Prompts.cs" />
+    <Compile Include="Utilities\Utility.cs" />
     <EmbeddedResource Include="GitData.resx">
       <DependentUpon>GitData.cs</DependentUpon>
     </EmbeddedResource>

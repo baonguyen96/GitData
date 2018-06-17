@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GitData.Storage
 {
-    class Repository
+    class Repository : Entity
     {
         public string Name { get; }
         public bool IsFolked { get; }

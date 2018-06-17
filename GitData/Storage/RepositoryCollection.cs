@@ -1,9 +1,5 @@
-﻿using System;
+﻿using GitData.Utilities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Octokit;
 using System.Linq;
 
 namespace GitData.Storage
@@ -29,31 +25,20 @@ namespace GitData.Storage
             string[] mostUsedLanguages = GetMostUsedLanguages();
             string[] mostRecentActiveRepo = GetMostRecentActiveRepo();
             string[] largestRepo = GetLargestRepo();
-            
-            string s = "";
 
-            s += Utilities.Utilities.FormatKeyValuePair(
-                "Most Used Languages", Utilities.Utilities.ConvertStringArrayToString(mostUsedLanguages));
-            s += Utilities.Utilities.FormatKeyValuePair(
+            string s = "";
+            
+            
+            s += Utility.FormatKeyValuePair(
+                "Most Used Languages", Utility.ConvertStringArrayToString(mostUsedLanguages));
+            s += Utility.FormatKeyValuePair(
                 "Most Recent Active Repository", $"{mostRecentActiveRepo[0]} on {mostRecentActiveRepo[1]}");
-            s += Utilities.Utilities.FormatKeyValuePair(
+            s += Utility.FormatKeyValuePair(
                 "Largest Repository", $"{largestRepo[0]} with {largestRepo[1]} KB");
 
             return s;
         }
-
-        /*
-         * public string Name { get; }
-        public bool IsFolked { get; }
-        public string Language { get; }
-        public string URL { get; }
-        public DateTime CreatedOn { get; }
-        public DateTime UpdatedOn { get; }
-        public long Size { get; }
-        public int ForksCount { get; }
-         *
-         */
-
+        
 
         private string[] GetMostUsedLanguages()
         {
