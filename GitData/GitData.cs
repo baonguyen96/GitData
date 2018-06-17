@@ -1,5 +1,7 @@
 ﻿using GitData.Storage;
 using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace GitData
@@ -30,19 +32,36 @@ namespace GitData
                 User user = GitHubFactory.CreateUser(usernameToSearchFor);
                 RepositoryCollection repositoryCollection = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor);
 
+                // user info
                 int rowCount = 0;
                 foreach (var property in user.GetType().GetProperties())
                 {
                     string[] data = { property.Name, property.GetValue(user, null).ToString() };
                     PopulateTable(UserInfoTable, data, rowCount++);
                 }
-                
-                //UserInfoBox.Text = GitHubFactory.CreateUser(usernameToSearchFor).ToString();
-                //RepositoryInfoBox.Text = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor).ToString();
+
+                // repositories info
+
+                // try to use reflection
+                //Type myType = (typeof(RepositoryCollection));
+                //MethodInfo[] repositoryCollectionMethods = myType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(m => !m.IsSpecialName).ToArray();
+
+                //string[] result = new string[2];
+                //foreach(var method in repositoryCollectionMethods)
+                //{
+                //    method.Invoke(this, result);
+                //    PopulateTable(RepositoryInfoTable, result, rowCount);
+                //}
+
+                rowCount = 0;
+                PopulateTable(RepositoryInfoTable, repositoryCollection.GetMostUsedLanguages(), rowCount++);
+                PopulateTable(RepositoryInfoTable, repositoryCollection.GetLargestRepo(), rowCount++);
+                PopulateTable(RepositoryInfoTable, repositoryCollection.GetMostRecentActiveRepo(), rowCount++);
+
             }
             catch(Exception ex)
             {
-                Utilities.Utility.ShowErrorMessage(ex);
+                Utilities.Utility.ShowErrorMessage();
             }
         }
         

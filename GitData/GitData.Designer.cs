@@ -138,15 +138,16 @@ namespace GitData
             // 
             // RepositoryInfoTable
             // 
+            this.RepositoryInfoTable.AutoSize = true;
+            this.RepositoryInfoTable.BackColor = System.Drawing.Color.Transparent;
             this.RepositoryInfoTable.ColumnCount = 2;
             this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.0096F));
-            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.99039F));
+            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.9904F));
             this.RepositoryInfoTable.Location = new System.Drawing.Point(6, 6);
             this.RepositoryInfoTable.Name = "RepositoryInfoTable";
             this.RepositoryInfoTable.RowCount = 1;
-            this.RepositoryInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RepositoryInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.RepositoryInfoTable.Size = new System.Drawing.Size(833, 40);
+            this.RepositoryInfoTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.RepositoryInfoTable.Size = new System.Drawing.Size(833, 460);
             this.RepositoryInfoTable.TabIndex = 1;
             // 
             // GitData
@@ -167,6 +168,7 @@ namespace GitData
             this.UserInfoPage.ResumeLayout(false);
             this.UserInfoPage.PerformLayout();
             this.RepositoryInfoPage.ResumeLayout(false);
+            this.RepositoryInfoPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
