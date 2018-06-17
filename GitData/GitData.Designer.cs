@@ -52,7 +52,7 @@ namespace GitData
             this.UsernameToSearch.Location = new System.Drawing.Point(580, 42);
             this.UsernameToSearch.Name = "UsernameToSearch";
             this.UsernameToSearch.Size = new System.Drawing.Size(227, 20);
-            this.UsernameToSearch.TabIndex = 0;
+            this.YourGitHubUsername.TabIndex = 4;
             this.UsernameToSearch.Text = "GitHub Username to Search";
             this.UsernameToSearch.Enter += new System.EventHandler(this.usernameToSearch_Enter);
             this.UsernameToSearch.Leave += new System.EventHandler(this.usernameToSearch_Leave);
@@ -95,9 +95,9 @@ namespace GitData
             this.ResultPane.Controls.Add(this.RepositoryInfoPage);
             this.ResultPane.Location = new System.Drawing.Point(60, 110);
             this.ResultPane.Name = "ResultPane";
-            this.ResultPane.SelectedIndex = 0;
+            //this.ResultPane.SelectedIndex = 0;
             this.ResultPane.Size = new System.Drawing.Size(853, 498);
-            this.ResultPane.TabIndex = 4;
+            //this.ResultPane.TabIndex = 0;
             // 
             // UserInfoPage
             // 

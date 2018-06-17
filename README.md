@@ -4,7 +4,7 @@
 
 ![Logo](./GitData/Assets/logo.png)
 
-*GitData* is a Windows applicatin with simple UI that allows user to view a summary of any GitHub account instantly. 
+*GitData* is a Windows application with simple UI that allows user to view a summary of any GitHub account instantly.
 
 ## Prerequisites
 

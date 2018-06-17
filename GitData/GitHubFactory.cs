@@ -24,17 +24,26 @@ namespace GitData.Storage
                 octokitUser = await _GitHubClient.User.Get(username);
             }).GetAwaiter().GetResult();
 
-            User user = new User
-            {
-                Name = octokitUser.Name,
-                Followers = octokitUser.Followers,
-                Followings = octokitUser.Following,
-                CreatedOn = octokitUser.CreatedAt.LocalDateTime,
-                UpdatedOn = octokitUser.UpdatedAt.LocalDateTime
-            };
-
-            return user;
+            return new User(octokitUser);
         }
+
+
+        public static RepositoryCollection CreateRepositoryCollection(string username)
+        {
+            if (_GitHubClient == null)
+            {
+                throw new Exception();
+            }
+
+            IReadOnlyList<Octokit.Repository> octokitRepos = null;
+            Task.Run(async () =>
+            {
+                octokitRepos = await _GitHubClient.Repository.GetAllForUser(username);
+            }).GetAwaiter().GetResult();
+
+            return new RepositoryCollection(octokitRepos);
+        }
+
 
         public static void CreateGitHubClient(string usernameCredential, string passwordCredential)
         {

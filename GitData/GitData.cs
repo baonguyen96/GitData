@@ -26,10 +26,11 @@ namespace GitData
             {
                 GitHubFactory.CreateGitHubClient(usernameCredential, passwordCredential);
                 UserInfoBox.Text = GitHubFactory.CreateUser(usernameToSearchFor).ToString();
+                RepositoryInfoBox.Text = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor).ToString();
             }
-            catch
+            catch(Exception ex)
             {
-                Utilities.Utilities.ShowErrorMessage();
+                Utilities.Utilities.ShowErrorMessage(ex);
             }
         }
         

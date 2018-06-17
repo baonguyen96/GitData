@@ -7,25 +7,47 @@ using System.Threading.Tasks;
 
 namespace GitData.Storage
 {
-    public class User
+    class User
     {
-        public string UserName { get; set; }
-        public string Name { get; set; }
-        public int Followers { get; set; }
-        public int Followings { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        //public RepositoryCollection Repositories { get; set; }
+        public string UserName { get; }
+        public string Name { get; }
+        public int Followers { get; }
+        public int Followings { get; }
+        public DateTime CreatedOn { get; }
+        public DateTime UpdatedOn { get; }
 
-                
+        public User(Octokit.User octokitUser)
+        {
+            Name = octokitUser.Name;
+            Followers = octokitUser.Followers;
+            Followings = octokitUser.Following;
+            CreatedOn = octokitUser.CreatedAt.LocalDateTime;
+            UpdatedOn = octokitUser.UpdatedAt.LocalDateTime;
+        }
+
+
+        //public override string ToString()
+        //{
+        //    string s = "";
+
+        //    foreach (var property in this.GetType().GetProperties())
+        //    {
+        //        s += String.Format($"{property.Name.PadRight(30, ' ')}{property.GetValue(this, null).ToString()}\r\n");
+        //    }
+
+        //    return s;
+        //}
+
+
         public override string ToString()
         {
-            return 
-                $"{"Name:".PadRight(30, ' ')}{Name}\r\n" +
-                $"{"Followers:".PadRight(30, ' ')}{Followers}\r\n" +
-                $"{"Followings:".PadRight(30, ' ')}{Followings}\r\n" +
-                $"{"CreatedOn:".PadRight(30, ' ')}{CreatedOn}\r\n" +
-                $"{"UpdatedOn:".PadRight(30, ' ')}{UpdatedOn}";
+            int paddingLength = 40;
+            return
+                $"{"Name".PadRight(paddingLength, ' ')}{Name}\r\n" +
+                $"{"Followers".PadRight(paddingLength, ' ')}{Followers}\r\n" +
+                $"{"Followings".PadRight(paddingLength, ' ')}{Followings}\r\n" +
+                $"{"CreatedOn".PadRight(paddingLength, ' ')}{CreatedOn}\r\n" +
+                $"{"UpdatedOn".PadRight(paddingLength, ' ')}{UpdatedOn}";
         }
 
     }
