@@ -113,11 +113,12 @@ namespace GitData
             // 
             // UserInfoTable
             // 
+            this.UserInfoTable.AutoScroll = true;
             this.UserInfoTable.AutoSize = true;
             this.UserInfoTable.BackColor = System.Drawing.Color.Transparent;
             this.UserInfoTable.ColumnCount = 2;
-            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.0096F));
-            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.9904F));
+            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.UserInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.UserInfoTable.Location = new System.Drawing.Point(6, 6);
             this.UserInfoTable.Name = "UserInfoTable";
             this.UserInfoTable.RowCount = 1;
@@ -138,11 +139,12 @@ namespace GitData
             // 
             // RepositoryInfoTable
             // 
+            this.RepositoryInfoTable.AutoScroll = true;
             this.RepositoryInfoTable.AutoSize = true;
             this.RepositoryInfoTable.BackColor = System.Drawing.Color.Transparent;
             this.RepositoryInfoTable.ColumnCount = 2;
-            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.0096F));
-            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.9904F));
+            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.RepositoryInfoTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.RepositoryInfoTable.Location = new System.Drawing.Point(6, 6);
             this.RepositoryInfoTable.Name = "RepositoryInfoTable";
             this.RepositoryInfoTable.RowCount = 1;

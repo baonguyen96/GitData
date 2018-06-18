@@ -11,14 +11,15 @@ namespace GitData.Utilities
     {
         public static void ShowErrorMessage()
         {
-            MessageBox.Show("An error has occured. Check your inputs and retry.", "Error");
+            ShowErrorMessage("An error has occured. Check your inputs and retry.");
         }
-
-
-        public static void ShowErrorMessage(Exception e)
+        
+        
+        public static void ShowErrorMessage(string message)
         {
-            MessageBox.Show($"An error has occured. Check your inputs and retry.\r\n{e.ToString()}", "Error");
+            MessageBox.Show(message, "Error");
         }
+
 
 
         public static String FormatKeyValuePair(string key, string value)

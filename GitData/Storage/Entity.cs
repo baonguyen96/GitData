@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GitData.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,15 +11,27 @@ namespace GitData.Storage
     {
         public override string ToString()
         {
-            string s = "";
+            string str = "";
+            string propertyName = "";
+            string propertyValue = "";
 
-            foreach (var property in GetType().GetProperties())
+            foreach (var property in this.GetType().GetProperties())
             {
-                s += Utilities.Utility.FormatKeyValuePair(
-                    property.Name, property.GetValue(this, null).ToString());
+                propertyName = property.Name;
+
+                if (property.GetValue(this, null) == null)
+                {
+                    propertyValue = "Unknown";
+                }
+                else
+                {
+                    propertyValue = property.GetValue(this, null).ToString();
+                }
+
+                str += Utility.FormatKeyValuePair(propertyName, propertyValue);
             }
 
-            return s;
+            return str;
         }
     }
 }

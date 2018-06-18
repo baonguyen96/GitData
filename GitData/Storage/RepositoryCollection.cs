@@ -20,25 +20,20 @@ namespace GitData.Storage
             }
         }
 
-        //public override string ToString()
-        //{
-        //    string[] mostUsedLanguages = GetMostUsedLanguages();
-        //    string[] mostRecentActiveRepo = GetMostRecentActiveRepo();
-        //    string[] largestRepo = GetLargestRepo();
 
-        //    string s = "";
-            
-            
-        //    s += Utility.FormatKeyValuePair(
-        //        "Most Used Languages", Utility.ConvertStringArrayToString(mostUsedLanguages));
-        //    s += Utility.FormatKeyValuePair(
-        //        "Most Recent Active Repository", $"{mostRecentActiveRepo[0]} on {mostRecentActiveRepo[1]}");
-        //    s += Utility.FormatKeyValuePair(
-        //        "Largest Repository", $"{largestRepo[0]} with {largestRepo[1]} KB");
+        public override string ToString()
+        {
+            string s = "";
 
-        //    return s;
-        //}
-        
+            foreach(Repository repository in Repositories)
+            {
+                s += repository.ToString();
+                s += "\r\n";
+            }
+
+            return s;
+        }
+
 
         public string[] GetMostUsedLanguages()
         {
@@ -48,7 +43,8 @@ namespace GitData.Storage
                     orderby languageGroups.Count() descending
                     select languageGroups.Key).ToArray();
             
-            return new string[] { "Most Used Languages", Utility.ConvertStringArrayToString(mostUsedLanguages) };
+            string[] result = { "Most Used Languages", Utility.ConvertStringArrayToString(mostUsedLanguages) };
+            return result;
         }
 
 
@@ -58,9 +54,10 @@ namespace GitData.Storage
                                         where !repository.IsFolked
                                         orderby repository.UpdatedOn descending
                                         select repository).First();
-            
-            return new string[] { "Most Recent Active Repository",
+
+            string[] result = { "Most Recent Active Repository",
                 $"{mostRecentActiveRepo.Name} on {mostRecentActiveRepo.UpdatedOn.ToString()}"};
+            return result;
             
         }
 
@@ -72,7 +69,8 @@ namespace GitData.Storage
                                orderby repository.Size descending
                                select repository).First();
 
-            return new string[] { "Largest Repository", $"{largestRepo.Name} with {largestRepo.Size} KB"};
+            string[] result = { "Largest Repository", $"{largestRepo.Name} with {largestRepo.Size} KB" };
+            return result;
         }
 
 
