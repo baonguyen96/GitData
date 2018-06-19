@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F35C518A-5F0F-4F56-845E-8A50B9E63E3B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>GitData</RootNamespace>
     <AssemblyName>GitData</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>

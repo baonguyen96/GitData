@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GitData.Storage
 {
-    class User : Entity
+    class User
     {
         public string Name { get; }
         public int Followers { get; }
@@ -15,8 +15,19 @@ namespace GitData.Storage
         public DateTime CreatedOn { get; }
         public DateTime UpdatedOn { get; }
 
-        public User(Octokit.User octokitUser)
+        public User(GitHubClient gitHubClient, string username)
         {
+            Octokit.User octokitUser = null;
+            Task.Run(async () =>
+            {
+                octokitUser = await gitHubClient.User.Get(username);
+            }).GetAwaiter().GetResult();
+
+            if(octokitUser == null)
+            {
+                throw new Exception();
+            }
+
             Name = octokitUser.Name;
             Followers = octokitUser.Followers;
             Followings = octokitUser.Following;

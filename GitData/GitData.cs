@@ -1,5 +1,6 @@
 ﻿using GitData.Storage;
 using GitData.Utilities;
+using Octokit;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -34,10 +35,10 @@ namespace GitData
 
             try
             {
-                GitHubFactory.CreateGitHubClient(usernameCredential, passwordCredential);
+                GitHubClient githubClient = GitHubFactory.CreateGitHubClient(usernameCredential, passwordCredential);
 
-                User user = GitHubFactory.CreateUser(usernameToSearchFor);
-                RepositoryCollection repositoryCollection = GitHubFactory.CreateRepositoryCollection(usernameToSearchFor);
+                Storage.User user = new Storage.User(githubClient, usernameToSearchFor);
+                Storage.RepositoryCollection repositoryCollection = new Storage.RepositoryCollection(githubClient, usernameToSearchFor);
 
                 // user info
                 foreach (var property in user.GetType().GetProperties())
@@ -45,9 +46,7 @@ namespace GitData
                     string[] data = { property.Name, property.GetValue(user, null).ToString() };
                     PopulateTable(UserInfoTable, data);
                 }
-
-                Console.WriteLine(repositoryCollection.ToString());
-
+                
                 // repositories info
                 PopulateTable(RepositoryInfoTable, repositoryCollection.GetMostUsedLanguages());
                 PopulateTable(RepositoryInfoTable, repositoryCollection.GetLargestRepo());
@@ -83,9 +82,9 @@ namespace GitData
         {
             for (int column = 0; column < rowsData.Length; column++)
             {
-                Control control = new Label() { Text = rowsData[column] };
+                Control control = new System.Windows.Forms.Label() { Text = rowsData[column] };
 
-                //control.Dock = DockStyle.Fill;
+                control.Dock = DockStyle.Fill;
 
                 //if (table.RowCount % 2 == 0)
                 //{

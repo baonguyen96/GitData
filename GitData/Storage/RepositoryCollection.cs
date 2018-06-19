@@ -1,6 +1,10 @@
 ﻿using GitData.Utilities;
+using Octokit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GitData.Storage
 {
@@ -9,13 +13,23 @@ namespace GitData.Storage
         public List<Repository> Repositories { get; set; }
 
 
-        public RepositoryCollection(IReadOnlyList<Octokit.Repository> octokitRepos)
+        public RepositoryCollection(GitHubClient gitHubClient, string username)
         {
-            Repositories = new List<Repository>();
+            IReadOnlyList<Octokit.Repository> octokitRepos = null;
+            Task.Run(async () =>
+            {
+                octokitRepos = await gitHubClient.Repository.GetAllForUser(username);
+            }).GetAwaiter().GetResult();
 
+            if(octokitRepos == null)
+            {
+                throw new Exception();
+            }
+
+            Repositories = new List<Repository>();
             foreach (var octokitRepo in octokitRepos)
             {
-                Repository repository = new Repository(octokitRepo);
+                Repository repository = new Repository(gitHubClient, octokitRepo);
                 Repositories.Add(repository);
             }
         }
@@ -37,12 +51,25 @@ namespace GitData.Storage
 
         public string[] GetMostUsedLanguages()
         {
-            string[] mostUsedLanguages = (from repository in Repositories
-                    where !repository.IsFolked
-                    group repository by repository.Language into languageGroups
-                    orderby languageGroups.Count() descending
-                    select languageGroups.Key).ToArray();
+            Dictionary<string, long> allLanguageSizes = new Dictionary<string, long>();
+            foreach(Repository repository in Repositories)
+            {
+                foreach(string key in repository.LanguageSize.Keys)
+                {
+                    if(allLanguageSizes.ContainsKey(key))
+                    {
+                        allLanguageSizes[key] += repository.LanguageSize[key];
+                    }
+                    else
+                    {
+                        allLanguageSizes.Add(key, repository.LanguageSize[key]);
+                    }
+                }
+            }
             
+            var sortedLanguageSizes = allLanguageSizes.OrderByDescending(x => x.Value);
+            string[] mostUsedLanguages = (from language in sortedLanguageSizes select language.Key).ToArray();
+
             string[] result = { "Most Used Languages", Utility.ConvertStringArrayToString(mostUsedLanguages) };
             return result;
         }
